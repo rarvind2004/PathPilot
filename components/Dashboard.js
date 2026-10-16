@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, Plus, Search, Trash2, User, LogOut } from 'lucide-react';
+import { Calendar, ListChecks, MapPin, Plus, Search, Trash2, User, LogOut } from 'lucide-react';
 
 const Dashboard = ({
   user,
@@ -73,7 +73,19 @@ const Dashboard = ({
                   <Trash2 className="w-5 h-5" />
                 </button>
               </div>
-              <div className="mt-4">
+              <div className="mt-4 flex items-center gap-4 text-sm text-gray-600">
+                <div className="flex items-center">
+                  <Calendar className="w-4 h-4 mr-1" />
+                  <span>
+                    {trip.day_count} {Number(trip.day_count) === 1 ? 'day' : 'days'}
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <ListChecks className="w-4 h-4 mr-1" />
+                  <span>
+                    {trip.activity_count} {Number(trip.activity_count) === 1 ? 'activity' : 'activities'}
+                  </span>
+                </div>
               </div>
               <button
                 onClick={() => handleViewTrip(trip)}
