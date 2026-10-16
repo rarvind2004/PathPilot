@@ -369,7 +369,11 @@ const handleSignup = async () => {
         addItineraryItem={addItineraryItem}
         updateItineraryItem={updateItineraryItem}
         deleteItineraryItem={deleteItineraryItem}
-        setCurrentView={setCurrentView}
+        setCurrentView={(view) => {
+          // Refresh trip stats so the dashboard reflects itinerary changes
+          if (view === 'dashboard') fetchTrips(user.email);
+          setCurrentView(view);
+        }}
       />
     );
   }

@@ -6,7 +6,9 @@ export async function GET(request) {
     const email = searchParams.get('email');
     
     const [trips] = await pool.query(
-      `SELECT t.trip_id, t.title, t.country_name
+      `SELECT t.trip_id, t.title, t.country_name,
+         (SELECT COUNT(*) FROM day d WHERE d.trip_id = t.trip_id) AS day_count,
+         (SELECT COUNT(*) FROM itinerary_item ii WHERE ii.trip_id = t.trip_id) AS activity_count
        FROM trip t
        JOIN creates c ON t.trip_id = c.trip_id
        WHERE c.email = ?
